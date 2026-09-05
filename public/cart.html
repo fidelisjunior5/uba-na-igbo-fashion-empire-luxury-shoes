@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Shopping Cart | Uba Na Igbo Fashion Empire & Luxury Shoes</title>
+
+  <meta
+    name="description"
+    content="Review your selected fashion and luxury shoe products before checkout."
+  >
+
+  <link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    .cart-page {
+      padding: 75px 0;
+    }
+
+    .cart-heading {
+      margin-bottom: 40px;
+    }
+
+    .cart-heading h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(40px, 6vw, 60px);
+      font-weight: 500;
+    }
+
+    .cart-layout {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid #e4e4e4;
+    }
+
+    .cart-image {
+      width: 120px;
+      height: 140px;
+      background: linear-gradient(145deg, #eee9df, #c7c0b3);
+      overflow: hidden;
+    }
+
+    .cart-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cart-image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+      font-family: Georgia, serif;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: #555;
+    }
+
+    .cart-item-info h2 {
+      font-family: Georgia, serif;
+      font-size: 21px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .cart-meta {
+      color: #777;
+      font-size: 11px;
+      margin: 4px 0;
+    }
+
+    .cart-price {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .cart-item-actions {
+      text-align: right;
+    }
+
+    .item-total {
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .remove-btn {
+      border: 0;
+      background: transparent;
+      color: #888;
+      cursor: pointer;
+      font-size: 10px;
+      text-decoration: underline;
+    }
+
+    .remove-btn:hover {
+      color: #111;
+    }
+
+    .cart-quantity {
+      display: inline-flex;
+      height: 36px;
+      border: 1px solid #ccc;
+    }
+
+    .cart-quantity button {
+      width: 32px;
+      border: 0;
+      background: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .cart-quantity input {
+      width: 42px;
+      text-align: center;
+      border: 0;
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      font-size: 13px;
+    }
+
+    .summary {
+      border: 1px solid #ddd;
+      padding: 28px;
+      position: sticky;
+      top: 110px;
+    }
+
+    .summary h2 {
+      font-family: Georgia, serif;
+      font-size: 28px;
+      font-weight: 500;
+      margin-bottom: 25px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 12px;
+    }
+
+    .summary-row strong {
+      text-align: right;
+    }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 0;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .checkout-btn {
+      display: flex;
+      width: 100%;
+      min-height: 52px;
+      background: #111;
+      color: white;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .checkout-btn:hover {
+      background: #333;
+    }
+
+    .continue-shopping {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 11px;
+      text-decoration: underline;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 90px 20px;
+      border: 1px solid #e4e4e4;
+    }
+
+    .empty-cart h2 {
+      font-family: Georgia, serif;
+      font-size: 32px;
+      font-weight: 500;
+    }
+
+    .empty-cart p {
+      color: #777;
+      margin: 10px 0 25px;
+    }
+
+    @media (max-width: 800px) {
+      .cart-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .summary {
+        position: static;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .cart-item {
+        grid-template-columns: 85px 1fr;
+        gap: 15px;
+      }
+
+      .cart-image {
+        width: 85px;
+        height: 105px;
+      }
+
+      .cart-item-actions {
+        grid-column: 2;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container nav-container">
+
+    <a href="/" class="logo">
+      <span class="logo-main">UBA NA IGBO</span>
+      <span class="logo-sub">FASHION EMPIRE & LUXURY SHOES</span>
+    </a>
+
+    <button class="menu-btn" id="menuBtn">☰</button>
+
+    <nav class="nav" id="nav">
+      <a href="/">Home</a>
+      <a href="/shop.html">Fashion</a>
+      <a href="/shop.html?category=shoes">Luxury Shoes</a>
+      <a href="/shop.html?category=preorder">Pre-Order</a>
+      <a href="/orders.html">Track Order</a>
+
+      <a href="/cart.html" class="cart-link">
+        Cart <span id="cartCount">0</span>
+      </a>
+    </nav>
+
+  </div>
+</header>
+
+<main class="cart-page">
+
+  <div class="container">
+
+    <div class="cart-heading">
+      <p class="eyebrow">YOUR SELECTION</p>
+      <h1>Shopping Cart</h1>
+    </div>
+
+    <div id="emptyCart" class="empty-cart" style="display:none;">
+      <h2>Your cart is empty</h2>
+
+      <p>
+        Browse our collection and select something you love.
+      </p>
+
+      <a href="/shop.html" class="btn btn-dark">
+        Start Shopping
+      </a>
+    </div>
+
+    <div id="cartLayout" class="cart-layout">
+
+      <div id="cartItems"></div>
+
+      <aside class="summary">
+
+        <h2>Order Summary</h2>
+
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <strong id="subtotal">₦0</strong>
+        </div>
+
+        <div class="summary-row">
+          <span>Delivery</span>
+          <strong id="delivery">Calculated at checkout</strong>
+        </div>
+
+        <div class="summary-total">
+          <span>Total</span>
+          <strong id="total">₦0</strong>
+        </div>
+
+        <button class="checkout-btn" id="checkoutBtn">
+          Proceed To Checkout
+        </button>
+
+        <a href="/shop.html" class="continue-shopping">
+          Continue Shopping
+        </a>
+
+      </aside>
+
+    </div>
+
+  </div>
+
+</main>
+
+<footer class="footer">
+
+  <div class="container footer-grid">
+
+    <div class="footer-brand">
+
+      <div class="logo">
+        <span class="logo-main">UBA NA IGBO</span>
+        <span class="logo-sub">FASHION EMPIRE & LUXURY SHOES</span>
+      </div>
+
+      <p>
+        Premium Nigerian fashion and luxury footwear,
+        available for direct order and pre-order.
+      </p>
+
+    </div>
+
+    <div class="footer-column">
+      <h3>Shop</h3>
+      <a href="/shop.html">All Products</a>
+      <a href="/shop.html?category=native">Native Wears</a>
+      <a href="/shop.html?category=shoes">Luxury Shoes</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>Customer</h3>
+      <a href="/cart.html">Shopping Cart</a>
+      <a href="/orders.html">Track Order</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      © <span id="year"></span>
+      Uba Na Igbo Fashion Empire & Luxury Shoes.
+      All rights reserved.
+    </div>
+  </div>
+
+</footer>
+
+<script>
+  const CART_KEY = "ubaNaIgboCart";
+
+  let cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+
+  function money(amount) {
+    return "₦" + Number(amount).toLocaleString("en-NG");
+  }
+
+  function saveCart() {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  }
+
+  function updateCartCount() {
+    const count = cart.reduce(
+      (total, item) => total + Number(item.quantity || 0),
+      0
+    );
+
+    document.getElementById("cartCount").textContent = count;
+  }
+
+  function renderCart() {
+    const emptyCart = document.getElementById("emptyCart");
+    const cartLayout = document.getElementById("cartLayout");
+    const cartItems = document.getElementById("cartItems");
+
+    if (!cart.length) {
+      emptyCart.style.display = "block";
+      cartLayout.style.display = "none";
+      updateCartCount();
+      return;
+    }
+
+    emptyCart.style.display = "none";
+    cartLayout.style.display = "grid";
+
+    cartItems.innerHTML = cart.map((item, index) => {
+
+      const itemTotal =
+        Number(item.price || 0) * Number(item.quantity || 1);
+
+      return `
+        <article class="cart-item">
+
+          <div class="cart-image">
+            ${
+              item.image
+                ? `<img
+                    src="${item.image}"
+                    alt="${escapeHTML(item.name)}"
+                    onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+                  >`
+                : ""
+            }
+
+            <div
+              class="cart-image-placeholder"
+              style="${item.image ? "display:none;" : "display:flex;"}"
+            >
+              UBA NA IGBO
+            </div>
+          </div>
+
+          <div class="cart-item-info">
+
+            <h2>${escapeHTML(item.name)}</h2>
+
+            <p class="cart-meta">
+              Size: ${escapeHTML(item.size || "Not selected")}
+            </p>
+
+            <p class="cart-meta">
+              Colour: ${escapeHTML(item.color || "Not selected")}
+            </p>
+
+            <p class="cart-price">
+              ${money(item.price)}
+            </p>
+
+          </div>
+
+          <div class="cart-item-actions">
+
+            <div class="item-total">
+              ${money(itemTotal)}
+            </div>
+
+            <div class="cart-quantity">
+
+              <button onclick="changeQuantity(${index}, -1)">
+                −
+              </button>
+
+              <input
+                type="text"
+                value="${item.quantity}"
+                readonly
+              >
+
+              <button onclick="changeQuantity(${index}, 1)">
+                +
+              </button>
+
+            </div>
+
+            <br><br>
+
+            <button
+              class="remove-btn"
+              onclick="removeItem(${index})"
+            >
+              Remove
+            </button>
+
+          </div>
+
+        </article>
+      `;
+    }).join("");
+
+    calculateSummary();
+    updateCartCount();
+  }
+
+  function calculateSummary() {
+    const subtotal = cart.reduce(
+      (total, item) =>
+        total +
+        Number(item.price || 0) *
+        Number(item.quantity || 1),
+      0
+    );
+
+    document.getElementById("subtotal").textContent = money(subtotal);
+    document.getElementById("total").textContent = money(subtotal);
+  }
+
+  function changeQuantity(index, amount) {
+    if (!cart[index]) return;
+
+    cart[index].quantity =
+      Number(cart[index].quantity || 1) + amount;
+
+    if (cart[index].quantity < 1) {
+      cart[index].quantity = 1;
+    }
+
+    if (cart[index].quantity > 20) {
+      cart[index].quantity = 20;
+    }
+
+    saveCart();
+    renderCart();
+  }
+
+  function removeItem(index) {
+    if (!cart[index]) return;
+
+    cart.splice(index, 1);
+
+    saveCart();
+    renderCart();
+  }
+
+  function escapeHTML(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  document.addEventListener("click", function (event) {
+    const button = event.target.closest("#checkoutBtn");
+    if (!button) return;
+    event.preventDefault();
+    if (!cart.length) {
+      alert("Your cart is empty.");
+      return;
+    }
+    window.location.assign("/checkout.html");
+  });
+
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+  document.getElementById("menuBtn").addEventListener(
+    "click",
+    function () {
+      document.getElementById("nav").classList.toggle("show");
+    }
+  );
+
+  renderCart();
+</script>
+
+</body>
+</html>

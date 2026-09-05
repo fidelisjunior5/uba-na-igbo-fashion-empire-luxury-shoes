@@ -1,0 +1,16 @@
+node_modules/
+admin-cookies.txt
+cookies.txt
+data/db.json
+data/*.json
+*.log
+
+backup-before-product-manager/
+src/server.backup.js
+src/server.before-paystack.js
+src/server.before-secure-orders.js
+src/server.before-unique-paystack-reference.js
+
+.env
+.env.*
+!.env.example

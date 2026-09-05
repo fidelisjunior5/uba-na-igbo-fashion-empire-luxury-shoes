@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Product Manager | Uba Na Igbo</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f6f4ef;color:#111}
+header{background:#111;color:#fff;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;top:0;z-index:5}
+header a{color:#fff;text-decoration:none;border:1px solid #fff;padding:9px 12px;border-radius:7px}
+main{max-width:1200px;margin:auto;padding:20px}
+.card{background:#fff;padding:20px;border-radius:14px;margin-bottom:20px;box-shadow:0 3px 15px #00000012}
+.formgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px}
+label{display:block;font-weight:bold;font-size:13px;margin-bottom:6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:14px}
+textarea{min-height:100px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin-top:15px}
+.image{border:3px solid transparent;border-radius:10px;overflow:hidden;cursor:pointer;text-align:center;background:#fafafa}
+.image.selected{border-color:#d4af37}
+.image img{width:100%;height:150px;object-fit:cover}
+.image small{display:block;padding:6px;font-size:10px;word-break:break-all}
+.preview{margin-top:15px}
+.preview img{width:180px;height:180px;object-fit:cover;border-radius:10px}
+.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+button{border:0;border-radius:8px;padding:11px 16px;font-weight:bold;cursor:pointer}
+.save{background:#111;color:#fff}
+.cancel{background:#eee}
+.delete{background:#b42318;color:#fff}
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:15px}
+.product{border:1px solid #ddd;border-radius:12px;overflow:hidden}
+.product img{width:100%;height:220px;object-fit:cover;background:#eee}
+.info{padding:14px}
+.price{font-size:18px;font-weight:bold;margin:7px 0}
+.badge{display:inline-block;background:#eee;border-radius:20px;padding:5px 8px;font-size:11px;margin:3px}
+.message{padding:12px;border-radius:8px;margin-bottom:15px;display:none}
+.ok{background:#e9f8ee;color:#126b32}
+.err{background:#fdecec;color:#a61b1b}
+.check{display:flex;align-items:center;gap:8px;margin-top:12px}
+.check input{width:auto}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+.filter{background:#eee}
+.filter.active{background:#111;color:#fff}
+@media(max-width:600px){
+main{padding:12px}
+header{padding:14px;font-size:14px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<strong>Uba Na Igbo Product Manager</strong>
+<a href="/admin.html">Admin Dashboard</a>
+</header>
+
+<main>
+
+<div id="message" class="message"></div>
+
+<section class="card">
+
+<h2 id="title">Add New Product</h2>
+
+<div class="formgrid">
+
+<div>
+<label>Product Name</label>
+<input id="name" placeholder="Luxury Senator Outfit">
+</div>
+
+<div>
+<label>Category</label>
+<select id="category">
+<option value="native">Native Wears</option>
+<option value="senator">Senator</option>
+<option value="agbada">Agbada</option>
+<option value="kaftan">Kaftan</option>
+<option value="shoes">Luxury Shoes</option>
+</select>
+</div>
+
+<div>
+<label>Subcategory</label>
+<input id="subcategory" placeholder="Premium Senator">
+</div>
+
+<div>
+<label>Price (₦)</label>
+<input id="price" type="number" min="0">
+</div>
+
+<div>
+<label>Sizes</label>
+<input id="sizes" placeholder="M, L, XL, XXL">
+</div>
+
+<div>
+<label>Colours</label>
+<input id="colors" placeholder="Black, Wine, White">
+</div>
+
+<div>
+<label>Preparation Time</label>
+<input id="prep" value="5–7 working days">
+</div>
+
+<div>
+<label>Delivery Time</label>
+<input id="delivery" value="1–3 working days">
+</div>
+
+</div>
+
+<label style="margin-top:15px">Description</label>
+<textarea id="description"></textarea>
+
+<div class="check">
+<input id="preorder" type="checkbox" checked>
+<label for="preorder">Available for Pre-Order</label>
+</div>
+
+<div class="check">
+<input id="available" type="checkbox" checked>
+<label for="available">Product Active / Visible</label>
+</div>
+
+<h3>Select Product Image</h3>
+
+<div id="selected">No image selected</div>
+
+<div id="preview" class="preview"></div>
+
+<div id="images" class="gallery">
+Loading images...
+</div>
+
+<div class="buttons">
+<button id="save" class="save">Add Product</button>
+<button id="cancel" class="cancel" style="display:none">Cancel Edit</button>
+</div>
+
+</section>
+
+<section class="card">
+
+<h2>Product Image Library</h2>
+
+<div class="filters">
+
+<button class="filter active" data-filter="all">All</button>
+<button class="filter" data-filter="native">Native</button>
+<button class="filter" data-filter="senator">Senator</button>
+<button class="filter" data-filter="agbada">Agbada</button>
+<button class="filter" data-filter="kaftan">Kaftan</button>
+<button class="filter" data-filter="shoes">Shoes</button>
+
+</div>
+
+<p>Select an image above when creating or editing a product. Clothing and shoe images can be stored together.</p>
+
+</section>
+
+<section class="card">
+
+<h2>Current Products</h2>
+
+<div id="products" class="products">
+Loading products...
+</div>
+
+</section>
+
+</main>
+
+<script>
+
+let images=[];
+let products=[];
+let selectedImage="";
+let editing=null;
+let imageFilter="all";
+
+const $=id=>document.getElementById(id);
+
+function msg(text,error=false){
+$("message").textContent=text;
+$("message").className="message "+(error?"err":"ok");
+$("message").style.display="block";
+
+setTimeout(()=>{
+$("message").style.display="none";
+},3000);
+}
+
+async function api(url,opt={}){
+const response=await fetch(url,{
+...opt,
+credentials:"include",
+headers:{
+"Content-Type":"application/json",
+...(opt.headers||{})
+}
+});
+
+const data=await response.json().catch(()=>({
+success:false,
+message:"Server response error"
+}));
+
+if(!response.ok){
+throw Error(data.message||"Request failed");
+}
+
+return data;
+}
+
+async function loadImages(){
+const data=await api("/api/admin/images");
+images=data.images||[];
+renderImages();
+}
+
+function imageMatchesFilter(image){
+
+if(imageFilter==="all") return true;
+
+const name=image.name.toLowerCase();
+
+if(imageFilter==="shoes"){
+return name.includes("shoe") ||
+name.includes("loafer") ||
+name.includes("formal");
+}
+
+return false;
+}
+
+function renderImages(){
+
+const box=$("images");
+box.innerHTML="";
+
+const filtered=images.filter(imageMatchesFilter);
+
+filtered.forEach(x=>{
+
+const el=document.createElement("div");
+
+el.className=
+"image"+
+(selectedImage===x.url?" selected":"");
+
+el.innerHTML=
+"<img src="+JSON.stringify(x.url)+">"+
+"<small>"+x.name+"</small>";
+
+el.onclick=()=>{
+
+selectedImage=x.url;
+
+$("selected").textContent=x.name;
+
+$("preview").innerHTML=
+"<img src="+JSON.stringify(x.url)+">";
+
+renderImages();
+
+};
+
+box.appendChild(el);
+
+});
+
+if(!filtered.length){
+
+box.textContent="No images found for this filter.";
+
+}
+
+}
+
+async function loadProducts(){
+
+const data=await api("/api/admin/products");
+
+products=data.products||[];
+
+renderProducts();
+
+}
+
+function renderProducts(){
+
+const box=$("products");
+
+box.innerHTML="";
+
+products.forEach(p=>{
+
+const el=document.createElement("article");
+
+el.className="product";
+
+el.innerHTML=
+"<img src="+JSON.stringify(p.image||"")+">"+
+"<div class=info>"+
+"<strong>"+esc(p.name)+"</strong>"+
+"<div class=price>₦"+
+Number(p.price||0).toLocaleString()+
+"</div>"+
+"<span class=badge>"+
+esc(p.category)+
+"</span>"+
+(p.preOrder?
+"<span class=badge>Pre-Order</span>":"")+
+"<p>"+
+(p.available?"🟢 Active":"🔴 Hidden")+
+"</p>"+
+"<div class=buttons>"+
+"<button class=save data-edit="+
+JSON.stringify(p.id)+
+">Edit</button>"+
+"<button class=delete data-delete="+
+JSON.stringify(p.id)+
+">Delete</button>"+
+"</div>"+
+"</div>";
+
+box.appendChild(el);
+
+});
+
+}
+
+function esc(value){
+
+return String(value??"").replace(
+/[&<>"']/g,
+m=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m])
+);
+
+}
+
+function reset(){
+
+editing=null;
+
+$("title").textContent="Add New Product";
+$("save").textContent="Add Product";
+$("cancel").style.display="none";
+
+$("name").value="";
+$("category").value="native";
+$("subcategory").value="";
+$("price").value="";
+$("sizes").value="";
+$("colors").value="";
+$("prep").value="5–7 working days";
+$("delivery").value="1–3 working days";
+$("description").value="";
+
+$("preorder").checked=true;
+$("available").checked=true;
+
+selectedImage="";
+
+$("selected").textContent="No image selected";
+$("preview").innerHTML="";
+
+renderImages();
+
+}
+
+function editProduct(id){
+
+const p=products.find(x=>x.id===id);
+
+if(!p)return;
+
+editing=id;
+
+$("title").textContent="Edit Product";
+$("save").textContent="Save Changes";
+$("cancel").style.display="inline-block";
+
+$("name").value=p.name||"";
+$("category").value=p.category||"native";
+$("subcategory").value=p.subcategory||"";
+$("price").value=p.price||"";
+
+$("sizes").value=(p.sizes||[]).join(", ");
+$("colors").value=(p.colors||[]).join(", ");
+
+$("prep").value=
+p.preparationTime||"5–7 working days";
+
+$("delivery").value=
+p.deliveryTime||"1–3 working days";
+
+$("description").value=p.description||"";
+
+$("preorder").checked=!!p.preOrder;
+$("available").checked=p.available!==false;
+
+selectedImage=p.image||"";
+
+$("selected").textContent=
+p.image||"No image selected";
+
+$("preview").innerHTML=
+p.image?
+"<img src="+JSON.stringify(p.image)+">":"";
+
+renderImages();
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+async function deleteProduct(id){
+
+const p=products.find(x=>x.id===id);
+
+if(!p)return;
+
+if(!window.confirm("Delete "+p.name+"?"))return;
+
+try{
+
+await api(
+"/api/admin/products/"+
+encodeURIComponent(id),
+{method:"DELETE"}
+);
+
+msg("Product deleted");
+
+await loadProducts();
+
+}catch(error){
+
+msg(error.message,true);
+
+}
+
+}
+
+$("cancel").onclick=reset;
+
+$("products").onclick=e=>{
+
+const edit=e.target.closest("[data-edit]");
+const del=e.target.closest("[data-delete]");
+
+if(edit)editProduct(edit.dataset.edit);
+
+if(del)deleteProduct(del.dataset.delete);
+
+};
+
+document.querySelectorAll("[data-filter]").forEach(button=>{
+
+button.onclick=()=>{
+
+imageFilter=button.dataset.filter;
+
+document.querySelectorAll("[data-filter]")
+.forEach(x=>x.classList.remove("active"));
+
+button.classList.add("active");
+
+renderImages();
+
+};
+
+});
+
+$("save").onclick=async()=>{
+
+const payload={
+
+name:$("name").value.trim(),
+
+category:$("category").value,
+
+subcategory:$("subcategory").value.trim(),
+
+price:Number($("price").value),
+
+sizes:$("sizes").value
+.split(",")
+.map(x=>x.trim())
+.filter(Boolean),
+
+colors:$("colors").value
+.split(",")
+.map(x=>x.trim())
+.filter(Boolean),
+
+preparationTime:$("prep").value.trim(),
+
+deliveryTime:$("delivery").value.trim(),
+
+description:$("description").value.trim(),
+
+preOrder:$("preorder").checked,
+
+available:$("available").checked,
+
+image:selectedImage
+
+};
+
+if(!payload.name||
+!payload.price||
+!payload.image){
+
+msg(
+"Enter product name and price, then select an image.",
+true
+);
+
+return;
+
+}
+
+try{
+
+if(editing){
+
+await api(
+"/api/admin/products/"+
+encodeURIComponent(editing),
+{
+method:"PATCH",
+body:JSON.stringify(payload)
+}
+);
+
+msg("Product updated successfully");
+
+}else{
+
+await api(
+"/api/admin/products",
+{
+method:"POST",
+body:JSON.stringify(payload)
+}
+);
+
+msg("Product created successfully");
+
+}
+
+reset();
+
+await loadProducts();
+
+}catch(error){
+
+msg(error.message,true);
+
+}
+
+};
+
+Promise.all([
+loadImages(),
+loadProducts()
+]).catch(error=>{
+msg(error.message,true);
+});
+
+</script>
+
+</body>
+</html>

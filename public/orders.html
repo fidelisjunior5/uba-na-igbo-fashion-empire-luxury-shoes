@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Track Order | Uba Na Igbo Fashion Empire & Luxury Shoes</title>
+
+  <meta
+    name="description"
+    content="Track your Uba Na Igbo Fashion Empire & Luxury Shoes order."
+  >
+
+  <link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    .orders-page {
+      padding: 70px 0;
+    }
+
+    .orders-heading {
+      margin-bottom: 40px;
+    }
+
+    .orders-heading h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(40px, 6vw, 60px);
+      font-weight: 500;
+    }
+
+    .track-box {
+      max-width: 700px;
+      margin-bottom: 45px;
+      padding: 30px;
+      border: 1px solid #ddd;
+    }
+
+    .track-box h2 {
+      font-family: Georgia, serif;
+      font-size: 27px;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .track-form {
+      display: flex;
+      gap: 10px;
+    }
+
+    .track-form input {
+      flex: 1;
+      min-height: 50px;
+      border: 1px solid #ccc;
+      padding: 0 15px;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .track-form input:focus {
+      border-color: #111;
+    }
+
+    .track-form button {
+      min-width: 150px;
+      border: 0;
+      background: #111;
+      color: white;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .track-form button:hover {
+      background: #333;
+    }
+
+    .error-message {
+      display: none;
+      margin-top: 15px;
+      padding: 14px;
+      background: #fff1f1;
+      border: 1px solid #e0b0b0;
+      color: #8b0000;
+      font-size: 12px;
+    }
+
+    .order-card {
+      display: none;
+      max-width: 900px;
+      border: 1px solid #ddd;
+      padding: 35px;
+    }
+
+    .order-success {
+      padding: 25px;
+      margin-bottom: 30px;
+      background: #f5f7f2;
+      border: 1px solid #d7dfce;
+    }
+
+    .order-success h2 {
+      font-family: Georgia, serif;
+      font-size: 30px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .order-success p {
+      color: #555;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .order-number {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .order-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      margin-bottom: 35px;
+    }
+
+    .detail-box {
+      border-bottom: 1px solid #eee;
+      padding-bottom: 15px;
+    }
+
+    .detail-box span {
+      display: block;
+      color: #888;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 7px;
+    }
+
+    .detail-box strong {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    .status-area {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 35px;
+    }
+
+    .status-box {
+      padding: 18px;
+      background: #f8f8f8;
+    }
+
+    .status-box span {
+      display: block;
+      color: #777;
+      font-size: 10px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .status-box strong {
+      font-size: 14px;
+    }
+
+    .order-items h2 {
+      font-family: Georgia, serif;
+      font-size: 27px;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .order-item {
+      display: grid;
+      grid-template-columns: 70px 1fr auto;
+      gap: 15px;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .order-item-image {
+      width: 70px;
+      height: 80px;
+      background: #eee9df;
+      overflow: hidden;
+    }
+
+    .order-item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .order-item h3 {
+      font-family: Georgia, serif;
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .order-item p {
+      color: #777;
+      font-size: 10px;
+      margin: 3px 0;
+    }
+
+    .order-item-price {
+      font-weight: bold;
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .order-total {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px solid #111;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .order-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 35px;
+    }
+
+    .order-actions a {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 25px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: #111;
+      color: white;
+    }
+
+    .btn-secondary {
+      border: 1px solid #111;
+      color: #111;
+    }
+
+    .loading {
+      display: none;
+      margin-top: 20px;
+      font-size: 12px;
+      color: #777;
+    }
+
+    @media (max-width: 650px) {
+      .track-form {
+        flex-direction: column;
+      }
+
+      .track-form button {
+        min-height: 50px;
+      }
+
+      .order-card {
+        padding: 20px;
+      }
+
+      .order-details,
+      .status-area {
+        grid-template-columns: 1fr;
+      }
+
+      .order-item {
+        grid-template-columns: 60px 1fr;
+      }
+
+      .order-item-price {
+        grid-column: 2;
+        text-align: left;
+      }
+
+      .order-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container nav-container">
+
+    <a href="/" class="logo">
+      <span class="logo-main">UBA NA IGBO</span>
+      <span class="logo-sub">FASHION EMPIRE & LUXURY SHOES</span>
+    </a>
+
+    <button class="menu-btn" id="menuBtn">☰</button>
+
+    <nav class="nav" id="nav">
+      <a href="/">Home</a>
+      <a href="/shop.html">Fashion</a>
+      <a href="/shop.html?category=shoes">Luxury Shoes</a>
+      <a href="/shop.html?category=preorder">Pre-Order</a>
+      <a href="/orders.html">Track Order</a>
+      <a href="/cart.html" class="cart-link">
+        Cart <span id="cartCount">0</span>
+      </a>
+    </nav>
+
+  </div>
+</header>
+
+<main class="orders-page">
+
+  <div class="container">
+
+    <div class="orders-heading">
+      <p class="eyebrow">CUSTOMER SERVICE</p>
+      <h1>Track Your Order</h1>
+    </div>
+
+    <div class="track-box">
+
+      <h2>Find Your Order</h2>
+
+      <p style="font-size:12px;color:#777;margin-bottom:18px;">
+        Enter the order number you received after placing your order.
+      </p>
+
+      <form id="trackForm" class="track-form">
+
+        <input
+          type="text"
+          id="orderNumber"
+          placeholder="Example: UNIG-1750000000000"
+          autocomplete="off"
+          required
+        >
+
+        <button type="submit">
+          Track Order
+        </button>
+
+      </form>
+
+      <div id="errorMessage" class="error-message"></div>
+
+      <div id="loading" class="loading">
+        Searching for your order...
+      </div>
+
+    </div>
+
+    <div id="orderCard" class="order-card">
+
+      <div class="order-success">
+
+        <h2>Order Received</h2>
+
+        <p>
+          Thank you for shopping with Uba Na Igbo Fashion Empire
+          & Luxury Shoes. Your order has been received successfully.
+        </p>
+
+        <div class="order-number">
+          Order Number:
+          <span id="displayOrderNumber"></span>
+        </div>
+
+      </div>
+
+      <div class="order-details">
+
+        <div class="detail-box">
+          <span>Customer</span>
+          <strong id="customerName"></strong>
+        </div>
+
+        <div class="detail-box">
+          <span>Phone</span>
+          <strong id="customerPhone"></strong>
+        </div>
+
+        <div class="detail-box">
+          <span>Email</span>
+          <strong id="customerEmail"></strong>
+        </div>
+
+        <div class="detail-box">
+          <span>Delivery Address</span>
+          <strong id="deliveryAddress"></strong>
+        </div>
+
+        <div class="detail-box">
+          <span>Order Date</span>
+          <strong id="orderDate"></strong>
+        </div>
+
+      </div>
+
+      <div class="status-area">
+
+        <div class="status-box">
+          <span>Order Status</span>
+          <strong id="orderStatus">
+            Order Received
+          </strong>
+        </div>
+
+        <div class="status-box">
+          <span>Payment Status</span>
+          <strong id="paymentStatus">
+            Pending
+          </strong>
+        </div>
+
+      </div>
+
+      <div class="order-items">
+
+        <h2>Items Ordered</h2>
+
+        <div id="orderItems"></div>
+
+        <div class="order-total">
+          <span>Total</span>
+          <strong id="orderTotal">₦0</strong>
+        </div>
+
+      </div>
+
+      <div class="order-actions">
+
+        <a href="/shop.html" class="btn-primary">
+          Continue Shopping
+        </a>
+
+        <a href="/" class="btn-secondary">
+          Back Home
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+<footer class="footer">
+
+  <div class="container footer-grid">
+
+    <div class="footer-brand">
+
+      <div class="logo">
+        <span class="logo-main">UBA NA IGBO</span>
+        <span class="logo-sub">FASHION EMPIRE & LUXURY SHOES</span>
+      </div>
+
+      <p>
+        Premium Nigerian fashion and luxury footwear,
+        available for direct order and pre-order.
+      </p>
+
+    </div>
+
+    <div class="footer-column">
+      <h3>Shop</h3>
+      <a href="/shop.html">All Products</a>
+      <a href="/shop.html?category=native">Native Wears</a>
+      <a href="/shop.html?category=shoes">Luxury Shoes</a>
+    </div>
+
+    <div class="footer-column">
+      <h3>Customer</h3>
+      <a href="/cart.html">Shopping Cart</a>
+      <a href="/orders.html">Track Order</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      © <span id="year"></span>
+      Uba Na Igbo Fashion Empire & Luxury Shoes.
+      All rights reserved.
+    </div>
+  </div>
+
+</footer>
+
+<script>
+  const CART_KEY = "ubaNaIgboCart";
+
+  function money(amount) {
+    return "₦" + Number(amount).toLocaleString("en-NG");
+  }
+
+  function escapeHTML(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function updateCartCount() {
+
+    const cart =
+      JSON.parse(localStorage.getItem(CART_KEY)) || [];
+
+    const count = cart.reduce(
+      (total, item) =>
+        total + Number(item.quantity || 0),
+      0
+    );
+
+    document.getElementById("cartCount").textContent = count;
+  }
+
+  function showError(message) {
+
+    const box =
+      document.getElementById("errorMessage");
+
+    box.textContent = message;
+    box.style.display = "block";
+  }
+
+  function hideError() {
+
+    document.getElementById("errorMessage")
+      .style.display = "none";
+  }
+
+  async function findOrder(orderNumber) {
+
+    hideError();
+
+    document.getElementById("orderCard")
+      .style.display = "none";
+
+    document.getElementById("loading")
+      .style.display = "block";
+
+    try {
+
+      const response = await fetch(
+        `/api/orders/${encodeURIComponent(orderNumber)}`
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.error || "Order not found."
+        );
+      }
+
+      displayOrder(data.order);
+
+    } catch (error) {
+
+      showError(
+        error.message ||
+        "Unable to find this order."
+      );
+
+    } finally {
+
+      document.getElementById("loading")
+        .style.display = "none";
+    }
+  }
+
+  function displayOrder(order) {
+
+    document.getElementById("orderCard")
+      .style.display = "block";
+
+    document.getElementById("displayOrderNumber")
+      .textContent = order.orderNumber;
+
+    document.getElementById("customerName")
+      .textContent = order.customerName;
+
+    document.getElementById("customerPhone")
+      .textContent = order.phone;
+
+    document.getElementById("customerEmail")
+      .textContent =
+        order.email || "Not provided";
+
+    document.getElementById("deliveryAddress")
+      .textContent = order.address;
+
+    document.getElementById("orderStatus")
+      .textContent =
+        order.orderStatus || "Order Received";
+
+    document.getElementById("paymentStatus")
+      .textContent =
+        order.paymentStatus || "Pending";
+
+    const date = new Date(order.createdAt);
+
+    document.getElementById("orderDate")
+      .textContent =
+        date.toLocaleString("en-NG", {
+          dateStyle: "medium",
+          timeStyle: "short"
+        });
+
+    const items =
+      Array.isArray(order.items)
+        ? order.items
+        : [];
+
+    let total = 0;
+
+    document.getElementById("orderItems").innerHTML =
+      items.map(item => {
+
+        const quantity =
+          Number(item.quantity || 1);
+
+        const price =
+          Number(item.price || 0);
+
+        const itemTotal =
+          price * quantity;
+
+        total += itemTotal;
+
+        return `
+          <div class="order-item">
+
+            <div class="order-item-image">
+              ${
+                item.image
+                  ? `<img
+                      src="${item.image}"
+                      alt="${escapeHTML(item.name)}"
+                      onerror="this.style.display='none'"
+                    >`
+                  : ""
+              }
+            </div>
+
+            <div>
+              <h3>${escapeHTML(item.name)}</h3>
+
+              <p>
+                Size: ${escapeHTML(item.size || "N/A")}
+              </p>
+
+              <p>
+                Colour: ${escapeHTML(item.color || "N/A")}
+              </p>
+
+              <p>
+                Quantity: ${quantity}
+              </p>
+            </div>
+
+            <div class="order-item-price">
+              ${money(itemTotal)}
+            </div>
+
+          </div>
+        `;
+
+      }).join("");
+
+    document.getElementById("orderTotal")
+      .textContent =
+        money(
+          Number(order.totalAmount || total)
+        );
+  }
+
+  document
+    .getElementById("trackForm")
+    .addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+      const orderNumber =
+        document.getElementById("orderNumber")
+          .value.trim();
+
+      if (!orderNumber) {
+        showError("Please enter your order number.");
+        return;
+      }
+
+      findOrder(orderNumber);
+    });
+
+  document
+    .getElementById("menuBtn")
+    .addEventListener("click", function() {
+
+      document
+        .getElementById("nav")
+        .classList.toggle("show");
+
+    });
+
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+  updateCartCount();
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const orderFromURL =
+    params.get("order");
+
+  if (orderFromURL) {
+
+    document.getElementById("orderNumber")
+      .value = orderFromURL;
+
+    findOrder(orderFromURL);
+  }
+</script>
+
+</body>
+</html>

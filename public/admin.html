@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | Uba Na Igbo</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:Arial,sans-serif;
+background:#f5f5f5;
+color:#171717;
+}
+
+.login-page{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+
+.login-box{
+width:100%;
+max-width:420px;
+background:#fff;
+padding:35px;
+border-radius:14px;
+box-shadow:0 10px 35px rgba(0,0,0,.12);
+}
+
+.brand{
+text-align:center;
+margin-bottom:25px;
+}
+
+.brand h1{
+font-size:24px;
+margin-bottom:8px;
+}
+
+.brand p{
+color:#777;
+font-size:14px;
+margin-top:5px;
+}
+
+label{
+display:block;
+font-weight:600;
+margin:16px 0 7px;
+}
+
+input,select{
+width:100%;
+padding:13px;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:15px;
+}
+
+button{
+border:0;
+cursor:pointer;
+border-radius:8px;
+padding:13px 18px;
+font-weight:600;
+}
+
+.login-btn{
+width:100%;
+margin-top:22px;
+background:#111;
+color:#fff;
+}
+
+.error{
+margin-top:15px;
+color:#c00;
+text-align:center;
+font-size:14px;
+}
+
+.dashboard{
+display:none;
+}
+
+.topbar{
+background:#111;
+color:#fff;
+padding:18px 20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.logout{
+background:#fff;
+color:#111;
+}
+
+.container{
+max-width:1300px;
+margin:auto;
+padding:25px 18px 50px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+margin-bottom:25px;
+}
+
+.stat{
+background:#fff;
+border-radius:12px;
+padding:20px;
+box-shadow:0 3px 15px rgba(0,0,0,.06);
+}
+
+.stat span{
+display:block;
+color:#777;
+font-size:13px;
+margin-bottom:8px;
+}
+
+.stat strong{
+font-size:25px;
+}
+
+.toolbar{
+background:#fff;
+padding:18px;
+border-radius:12px;
+margin-bottom:18px;
+display:flex;
+gap:12px;
+}
+
+.toolbar input{
+flex:1;
+}
+
+.refresh{
+background:#111;
+color:#fff;
+}
+
+.orders{
+display:grid;
+gap:15px;
+}
+
+.order-card{
+background:#fff;
+border-radius:12px;
+padding:20px;
+box-shadow:0 3px 15px rgba(0,0,0,.06);
+}
+
+.order-head{
+display:flex;
+justify-content:space-between;
+gap:15px;
+margin-bottom:15px;
+}
+
+.order-number{
+font-size:18px;
+font-weight:700;
+}
+
+.date{
+color:#777;
+font-size:13px;
+margin-top:5px;
+}
+
+.status{
+padding:7px 10px;
+border-radius:20px;
+background:#eee;
+font-size:12px;
+font-weight:700;
+}
+
+.details{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-bottom:18px;
+}
+
+.detail{
+border:1px solid #eee;
+padding:12px;
+border-radius:8px;
+}
+
+.detail small{
+display:block;
+color:#777;
+margin-bottom:5px;
+}
+
+.items{
+border-top:1px solid #eee;
+padding-top:15px;
+}
+
+.item{
+padding:10px 0;
+border-bottom:1px solid #eee;
+}
+
+.item-name{
+font-weight:700;
+}
+
+.item-info{
+color:#777;
+font-size:13px;
+margin-top:4px;
+}
+
+.order-bottom{
+margin-top:18px;
+padding-top:15px;
+border-top:1px solid #eee;
+display:flex;
+justify-content:space-between;
+gap:15px;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.total{
+font-size:19px;
+font-weight:700;
+}
+
+.controls{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.controls select{
+width:auto;
+min-width:170px;
+}
+
+.save-btn{
+background:#111;
+color:#fff;
+}
+
+.message{
+text-align:center;
+padding:40px;
+color:#777;
+background:#fff;
+border-radius:12px;
+}
+
+@media(max-width:800px){
+.stats{
+grid-template-columns:repeat(2,1fr);
+}
+
+.details{
+grid-template-columns:1fr;
+}
+
+.order-head{
+flex-direction:column;
+}
+}
+
+@media(max-width:500px){
+.toolbar{
+flex-direction:column;
+}
+
+.login-box{
+padding:25px 20px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<section class="login-page" id="loginPage">
+
+<div class="login-box">
+
+<div class="brand">
+<h1>Uba Na Igbo</h1>
+<p>Fashion Empire & Luxury Shoes</p>
+<p>Admin Dashboard</p>
+</div>
+
+<form id="loginForm">
+
+<label for="username">Username</label>
+<input type="text" id="username" required>
+
+<label for="password">Password</label>
+<input type="password" id="password" required>
+
+<button class="login-btn" type="submit">
+Login
+</button>
+
+<div class="error" id="loginError"></div>
+
+</form>
+
+</div>
+
+</section>
+
+<section class="dashboard" id="dashboard">
+
+<header class="topbar">
+<h1>Uba Na Igbo Admin</h1>
+<button class="logout" onclick="logout()">Logout</button>
+</header>
+
+<main class="container">
+
+<div class="stats">
+
+<div class="stat">
+<span>Total Orders</span>
+<strong id="totalOrders">0</strong>
+</div>
+
+<div class="stat">
+<span>Pending Orders</span>
+<strong id="pendingOrders">0</strong>
+</div>
+
+<div class="stat">
+<span>Completed Orders</span>
+<strong id="completedOrders">0</strong>
+</div>
+
+<div class="stat">
+<span>Total Sales</span>
+<strong id="totalSales">₦0</strong>
+</div>
+
+</div>
+
+<div class="toolbar">
+
+<input
+type="search"
+id="search"
+placeholder="Search order, customer or phone..."
+>
+
+<button class="refresh" onclick="loadOrders()">
+Refresh
+</button>
+
+</div>
+
+<div id="orders" class="orders">
+
+<div class="message">
+Loading orders...
+</div>
+
+</div>
+
+</main>
+
+</section>
+
+<script>
+
+const ADMIN_KEY = "ubaNaIgboAdminLoggedIn";
+
+let orders = [];
+
+function formatMoney(amount){
+
+return new Intl.NumberFormat("en-NG",{
+style:"currency",
+currency:"NGN",
+maximumFractionDigits:0
+}).format(Number(amount)||0);
+
+}
+
+function escapeHTML(value){
+
+return String(value ?? "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+document.getElementById("loginForm")
+.addEventListener("submit",async function(event){
+
+event.preventDefault();
+
+const username=document.getElementById("username").value.trim();
+
+const password=document.getElementById("password").value;
+
+const error=document.getElementById("loginError");
+
+error.textContent="";
+
+try{
+
+const response=await fetch("/api/admin/login",{ credentials:"include",
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+username,
+password
+})
+});
+
+const data=await response.json();
+
+if(!response.ok || !data.success){
+
+throw new Error(
+data.message || "Invalid login details"
+);
+
+}
+
+localStorage.setItem(ADMIN_KEY,"true");
+
+showDashboard();
+
+}catch(err){
+
+error.textContent=err.message || "Login failed";
+
+}
+
+});
+
+function showDashboard(){
+
+document.getElementById("loginPage").style.display="none";
+
+document.getElementById("dashboard").style.display="block";
+
+loadOrders();
+
+}
+
+function logout(){
+
+localStorage.removeItem(ADMIN_KEY);
+
+location.reload();
+
+}
+
+async function loadOrders(){
+
+const container=document.getElementById("orders");
+
+container.innerHTML=
+'<div class="message">Loading orders...</div>';
+
+try{
+
+const response=await fetch("/api/admin/orders", { credentials: "include" });
+
+const data=await response.json();
+
+if(!response.ok || !data.success){
+
+throw new Error(
+data.message || "Could not load orders"
+);
+
+}
+
+orders=Array.isArray(data.orders)?data.orders:[];
+
+updateStats();
+
+renderOrders();
+
+}catch(error){
+
+container.innerHTML=
+`<div class="message">${escapeHTML(error.message)}</div>`;
+
+}
+
+}
+
+function updateStats(){
+
+document.getElementById("totalOrders").textContent=orders.length;
+
+document.getElementById("pendingOrders").textContent=
+orders.filter(order=>
+!["Completed","Cancelled"].includes(order.orderStatus)
+).length;
+
+document.getElementById("completedOrders").textContent=
+orders.filter(order=>
+order.orderStatus==="Completed"
+).length;
+
+const sales=orders.reduce(
+(sum,order)=>sum+(Number(order.totalAmount)||0),0
+);
+
+document.getElementById("totalSales").textContent=
+formatMoney(sales);
+
+}
+
+function renderOrders(){
+
+const container=document.getElementById("orders");
+
+const search=document.getElementById("search")
+.value.trim().toLowerCase();
+
+const filtered=orders.filter(order=>{
+
+const text=[
+order.orderNumber,
+order.customerName,
+order.phone,
+order.email
+].join(" ").toLowerCase();
+
+return text.includes(search);
+
+});
+
+if(!filtered.length){
+
+container.innerHTML=
+'<div class="message">No orders found.</div>';
+
+return;
+
+}
+
+container.innerHTML=filtered.map(order=>{
+
+const items=Array.isArray(order.items)?order.items:[];
+
+return `
+
+<article class="order-card">
+
+<div class="order-head">
+
+<div>
+
+<div class="order-number">
+${escapeHTML(order.orderNumber)}
+</div>
+
+<div class="date">
+${new Date(order.createdAt).toLocaleString("en-NG")}
+</div>
+
+</div>
+
+<div class="status">
+${escapeHTML(order.orderStatus||"Order Received")}
+</div>
+
+</div>
+
+<div class="details">
+
+<div class="detail">
+<small>Customer</small>
+${escapeHTML(order.customerName)}
+</div>
+
+<div class="detail">
+<small>Phone</small>
+${escapeHTML(order.phone)}
+</div>
+
+<div class="detail">
+<small>Email</small>
+${escapeHTML(order.email||"Not provided")}
+</div>
+
+<div class="detail">
+<small>Delivery Address</small>
+${escapeHTML(order.address)}
+</div>
+
+<div class="detail">
+<small>Payment</small>
+${escapeHTML(order.paymentStatus||"Pending")}
+</div>
+
+</div>
+
+<div class="items">
+
+<strong>Items Ordered</strong>
+
+${items.map(item=>`
+
+<div class="item">
+
+<div class="item-name">
+${escapeHTML(item.name)}
+</div>
+
+<div class="item-info">
+Size: ${escapeHTML(item.size||"N/A")}
+|
+Colour: ${escapeHTML(item.color||"N/A")}
+|
+Quantity: ${Number(item.quantity)||1}
+|
+${formatMoney(item.price)}
+</div>
+
+</div>
+
+`).join("")}
+
+</div>
+
+<div class="order-bottom">
+
+<div class="total">
+Total: ${formatMoney(order.totalAmount)}
+</div>
+
+<div class="controls">
+
+<select id="status-${escapeHTML(order.id)}">
+
+<option ${order.orderStatus==="Order Received"?"selected":""}>
+Order Received
+</option>
+
+<option ${order.orderStatus==="Preparing"?"selected":""}>
+Preparing
+</option>
+
+<option ${order.orderStatus==="Ready for Delivery"?"selected":""}>
+Ready for Delivery
+</option>
+
+<option ${order.orderStatus==="Out for Delivery"?"selected":""}>
+Out for Delivery
+</option>
+
+<option ${order.orderStatus==="Delivered"?"selected":""}>
+Delivered
+</option>
+
+<option ${order.orderStatus==="Completed"?"selected":""}>
+Completed
+</option>
+
+<option ${order.orderStatus==="Cancelled"?"selected":""}>
+Cancelled
+</option>
+
+</select>
+
+<select id="payment-${escapeHTML(order.id)}">
+
+<option ${order.paymentStatus==="Pending"?"selected":""}>
+Pending
+</option>
+
+<option ${order.paymentStatus==="Paid"?"selected":""}>
+Paid
+</option>
+
+<option ${order.paymentStatus==="Failed"?"selected":""}>
+Failed
+</option>
+
+<option ${order.paymentStatus==="Refunded"?"selected":""}>
+Refunded
+</option>
+
+</select>
+
+<button
+class="save-btn"
+onclick="updateOrder('${escapeHTML(order.id)}')">
+Save
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+`;
+
+}).join("");
+
+}
+
+async function updateOrder(id){
+
+const status=document.getElementById(
+`status-${id}`
+).value;
+
+const paymentStatus=document.getElementById(
+`payment-${id}`
+).value;
+
+try{
+
+const response=await fetch(
+`/api/admin/orders/${encodeURIComponent(id)}`,
+{ credentials:"include",
+method:"PATCH",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+orderStatus:status,
+paymentStatus
+})
+}
+);
+
+const data=await response.json();
+
+if(!response.ok || !data.success){
+
+throw new Error(
+data.message||"Could not update order"
+);
+
+}
+
+alert("Order updated successfully.");
+
+loadOrders();
+
+}catch(error){
+
+alert(error.message||"Update failed");
+
+}
+
+}
+
+document.getElementById("search")
+.addEventListener("input",renderOrders);
+
+if(localStorage.getItem(ADMIN_KEY)==="true"){
+showDashboard();
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Product | Uba Na Igbo Fashion Empire & Luxury Shoes</title>
+
+  <meta name="description" content="View product details and order from Uba Na Igbo Fashion Empire & Luxury Shoes.">
+
+  <link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    .product-page {
+      padding: 80px 0;
+    }
+
+    .product-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: start;
+    }
+
+    .detail-image {
+      min-height: 600px;
+      background: linear-gradient(145deg, #eee9df, #c7c0b3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .detail-image img {
+      width: 100%;
+      height: 600px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .detail-placeholder {
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Georgia, serif;
+      letter-spacing: 4px;
+      color: #555;
+    }
+
+    .detail-info .category {
+      color: #b18a4a;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .detail-info h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(38px, 5vw, 58px);
+      line-height: 1.1;
+      font-weight: 500;
+      margin: 10px 0;
+    }
+
+    .detail-price {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    .detail-description {
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    .option {
+      margin-bottom: 25px;
+    }
+
+    .option label {
+      display: block;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .option select {
+      width: 100%;
+      height: 48px;
+      border: 1px solid #ccc;
+      background: white;
+      padding: 0 12px;
+    }
+
+    .quantity {
+      display: flex;
+      width: 140px;
+      height: 48px;
+      border: 1px solid #ccc;
+    }
+
+    .quantity button {
+      width: 42px;
+      border: 0;
+      background: white;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .quantity input {
+      width: 56px;
+      border: 0;
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      text-align: center;
+    }
+
+    .add-cart {
+      width: 100%;
+      min-height: 55px;
+      background: #111;
+      color: white;
+      border: 0;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 10px;
+    }
+
+    .add-cart:hover {
+      background: #333;
+    }
+
+    .delivery-box {
+      margin-top: 25px;
+      padding: 20px;
+      background: #f6f2eb;
+      border-left: 3px solid #b18a4a;
+    }
+
+    .delivery-box h3 {
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .delivery-box p {
+      color: #777;
+      font-size: 12px;
+      margin: 4px 0;
+    }
+
+    .loading {
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 15px;
+      padding: 14px;
+      background: #eef7ee;
+      color: #315c31;
+      font-size: 12px;
+    }
+
+    @media (max-width: 800px) {
+      .product-detail {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .detail-image,
+      .detail-placeholder {
+        min-height: 420px;
+      }
+
+      .detail-image img {
+        height: 420px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="container nav-container">
+
+      <a href="/" class="logo">
+        <span class="logo-main">UBA NA IGBO</span>
+        <span class="logo-sub">FASHION EMPIRE & LUXURY SHOES</span>
+      </a>
+
+      <button class="menu-btn" id="menuBtn">☰</button>
+
+      <nav class="nav" id="nav">
+        <a href="/">Home</a>
+        <a href="/shop.html">Fashion</a>
+        <a href="/shop.html?category=shoes">Luxury Shoes</a>
+        <a href="/shop.html?category=preorder">Pre-Order</a>
+        <a href="/orders.html">Track Order</a>
+        <a href="/cart.html" class="cart-link">
+          Cart <span id="cartCount">0</span>
+        </a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="product-page">
+
+    <div class="container">
+
+      <div id="loading" class="loading">
+        Loading product...
+      </div>
+
+      <div
+        id="productDetail"
+        class="product-detail"
+        style="display:none;"
+      >
+
+        <div class="detail-image" id="detailImage"></div>
+
+        <div class="detail-info">
+
+          <p class="category" id="productCategory"></p>
+
+          <h1 id="productName"></h1>
+
+          <div class="detail-price" id="productPrice"></div>
+
+          <p class="detail-description" id="productDescription"></p>
+
+          <div class="option">
+            <label for="size">Select Size</label>
+            <select id="size"></select>
+          </div>
+
+          <div class="option">
+            <label for="color">Select Colour</label>
+            <select id="color"></select>
+          </div>
+
+          <div class="option">
+
+            <label>Quantity</label>
+
+            <div class="quantity">
+
+              <button type="button" id="minus">
+                −
+              </button>
+
+              <input
+                id="quantity"
+                type="number"
+                value="1"
+                min="1"
+                max="20"
+              >
+
+              <button type="button" id="plus">
+                +
+              </button>
+
+            </div>
+
+          </div>
+
+          <button class="add-cart" id="addCart">
+            Add To Cart
+          </button>
+
+          <div class="success-message" id="successMessage">
+            Product added to your cart successfully.
+          </div>
+
+          <div class="delivery-box" id="deliveryBox">
+            <h3>PRE-ORDER & DELIVERY</h3>
+            <p id="preparation"></p>
+            <p id="delivery"></p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="/js/app.js"></script>
+
+  <script>
+    let product = null;
+
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+
+    async function loadProduct() {
+
+      if (!productId) {
+        showError("No product was selected.");
+        return;
+      }
+
+      try {
+
+        const response =
+          await fetch("/api/products/" + encodeURIComponent(productId));
+
+        const data = await response.json();
+
+        if (!data.success) {
+          throw new Error("Product not found");
+        }
+
+        product = data.product;
+
+        document.title =
+          product.name +
+          " | Uba Na Igbo Fashion Empire & Luxury Shoes";
+
+        document.getElementById("loading").style.display = "none";
+
+        document.getElementById("productDetail").style.display = "grid";
+
+        document.getElementById("productCategory").textContent =
+          product.subcategory || product.category;
+
+        document.getElementById("productName").textContent =
+          product.name;
+
+        document.getElementById("productPrice").textContent =
+          "₦" + Number(product.price).toLocaleString("en-NG");
+
+        document.getElementById("productDescription").textContent =
+          product.description;
+
+        const sizeSelect = document.getElementById("size");
+
+        sizeSelect.innerHTML =
+          (product.sizes || []).map(size =>
+            `<option value="${escapeHTML(size)}">${escapeHTML(size)}</option>`
+          ).join("");
+
+        const colorSelect = document.getElementById("color");
+
+        colorSelect.innerHTML =
+          (product.colors || []).map(color =>
+            `<option value="${escapeHTML(color)}">${escapeHTML(color)}</option>`
+          ).join("");
+
+        const imageBox = document.getElementById("detailImage");
+
+        imageBox.innerHTML = `
+          <span class="product-label">
+            ${product.preOrder ? "PRE-ORDER" : "AVAILABLE"}
+          </span>
+
+          <img
+            src="${product.image}"
+            alt="${escapeHTML(product.name)}"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          >
+
+          <div
+            class="detail-placeholder"
+            style="display:none;"
+          >
+            ${escapeHTML(product.subcategory || product.category)}
+          </div>
+        `;
+
+        document.getElementById("preparation").textContent =
+          "Preparation: " +
+          (product.preparationTime || "To be confirmed");
+
+        document.getElementById("delivery").textContent =
+          "Delivery: " +
+          (product.deliveryTime || "To be confirmed");
+
+      } catch (error) {
+        console.error(error);
+        showError("Product could not be found.");
+      }
+    }
+
+    function showError(message) {
+      document.getElementById("loading").innerHTML = `
+        <h2>${message}</h2>
+        <p style="margin-top:10px;">
+          <a href="/shop.html">Return to shop</a>
+        </p>
+      `;
+    }
+
+    function escapeHTML(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    document.getElementById("minus").addEventListener("click", () => {
+
+      const input = document.getElementById("quantity");
+
+      const value = Number(input.value);
+
+      if (value > 1) {
+        input.value = value - 1;
+      }
+
+    });
+
+    document.getElementById("plus").addEventListener("click", () => {
+
+      const input = document.getElementById("quantity");
+
+      const value = Number(input.value);
+
+      if (value < 20) {
+        input.value = value + 1;
+      }
+
+    });
+
+    document.getElementById("addCart").addEventListener("click", () => {
+
+      if (!product) return;
+
+      const size = document.getElementById("size").value;
+      const color = document.getElementById("color").value;
+      const quantity =
+        Number(document.getElementById("quantity").value) || 1;
+
+      const cart =
+        JSON.parse(localStorage.getItem("ubaNaIgboCart")) || [];
+
+      const existing = cart.find(item =>
+        item.productId === product.id &&
+        item.size === size &&
+        item.color === color
+      );
+
+      if (existing) {
+
+        existing.quantity += quantity;
+
+      } else {
+
+        cart.push({
+          productId: product.id,
+          name: product.name,
+          price: Number(product.price),
+          image: product.image,
+          size,
+          color,
+          quantity
+        });
+
+      }
+
+      localStorage.setItem(
+        "ubaNaIgboCart",
+        JSON.stringify(cart)
+      );
+
+      document.getElementById("cartCount").textContent =
+        cart.reduce(
+          (total, item) =>
+            total + Number(item.quantity || 1),
+          0
+        );
+
+      const message =
+        document.getElementById("successMessage");
+
+      message.style.display = "block";
+
+      setTimeout(() => {
+        message.style.display = "none";
+      }, 3000);
+
+    });
+
+    const menuBtn = document.getElementById("menuBtn");
+    const nav = document.getElementById("nav");
+
+    menuBtn.addEventListener("click", () => {
+      nav.classList.toggle("open");
+    });
+
+    loadProduct();
+  </script>
+
+</body>
+</html>
