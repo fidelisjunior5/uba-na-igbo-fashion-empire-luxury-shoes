@@ -261,6 +261,7 @@ app.get("/api/products/:id", (req, res) => {
 });
 
 app.post("/api/orders", (req, res) => {
+  try {
   const db = readDB();
 
   const {
@@ -362,6 +363,14 @@ app.post("/api/orders", (req, res) => {
     message: "Order received successfully",
     order
   });
+  } catch (error) {
+    console.error("ORDER API ERROR:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Order creation failed",
+      error: error.message
+    });
+  }
 });;
 
 app.get("/api/orders/:orderNumber", (req, res) => {
