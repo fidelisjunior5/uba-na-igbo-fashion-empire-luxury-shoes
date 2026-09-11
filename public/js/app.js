@@ -4,7 +4,7 @@ async function loadFeaturedProducts() {
   if (!productGrid) return;
 
   try {
-    const response = await fetch("/api/products");
+    const response = await fetch(window.API_BASE + "/api/products");
     const data = await response.json();
 
     if (!data.success || !data.products.length) {

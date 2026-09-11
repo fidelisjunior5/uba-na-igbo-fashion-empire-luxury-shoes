@@ -797,6 +797,29 @@
       "orderStatus": "Order Received",
       "createdAt": "2026-09-05T20:19:50.257Z",
       "paymentReference": "UNIG-1788639590257-1788639590273"
+    },
+    {
+      "id": "044bad9d-62cf-4b6e-afe3-c3b2231645f2",
+      "orderNumber": "UNIG-1789090438740",
+      "customerName": "Test Customer",
+      "phone": "08012345678",
+      "email": "test@example.com",
+      "address": "Test Address, Aba",
+      "items": [
+        {
+          "productId": "native-001",
+          "name": "Premium Native Outfit",
+          "price": 60000,
+          "quantity": 1,
+          "size": "M",
+          "color": "Black",
+          "image": "/images/ba04d23903584e139145fd0d03373c03.jpg"
+        }
+      ],
+      "totalAmount": 60000,
+      "paymentStatus": "Pending",
+      "orderStatus": "Order Received",
+      "createdAt": "2026-09-11T01:33:58.740Z"
     }
   ],
   "users": []

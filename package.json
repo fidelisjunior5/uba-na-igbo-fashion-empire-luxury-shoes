@@ -7,6 +7,9 @@
     "start": "node src/server.js"
   },
   "dependencies": {
+    "@capacitor/android": "^8.5.1",
+    "@capacitor/cli": "^8.5.1",
+    "@capacitor/core": "^8.5.1",
     "axios": "^1.20.0",
     "cors": "^2.8.6",
     "express": "^5.2.1",

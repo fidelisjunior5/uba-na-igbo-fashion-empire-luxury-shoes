@@ -6,7 +6,7 @@ async function loadProducts() {
   const count = document.getElementById("productCount");
 
   try {
-    const response = await fetch("/api/products");
+    const response = await fetch(window.API_BASE + "/api/products");
     const data = await response.json();
 
     if (!data.success) {

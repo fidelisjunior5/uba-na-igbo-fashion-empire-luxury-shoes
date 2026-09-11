@@ -296,6 +296,7 @@
 
   </main>
 
+  <script src="/js/config.js"></script>
   <script src="/js/app.js"></script>
 
   <script>
@@ -314,7 +315,7 @@
       try {
 
         const response =
-          await fetch("/api/products/" + encodeURIComponent(productId));
+          await fetch(window.API_BASE + "/api/products/" + encodeURIComponent(productId));
 
         const data = await response.json();
 
