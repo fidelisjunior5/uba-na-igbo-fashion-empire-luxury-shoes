@@ -368,6 +368,7 @@
               <input
                 type="text"
                 id="state"
+                form="checkoutForm"
                 placeholder="e.g. Abia"
                 required
               >
@@ -381,6 +382,7 @@
               <input
                 type="text"
                 id="city"
+                form="checkoutForm"
                 placeholder="e.g. Aba"
                 required
               >
@@ -393,6 +395,7 @@
 
               <textarea
                 id="address"
+                form="checkoutForm"
                 placeholder="Enter your complete delivery address"
                 required
               ></textarea>
@@ -403,6 +406,7 @@
 
               <textarea
                 id="deliveryNote"
+                form="checkoutForm"
                 placeholder="Optional: landmark, preferred delivery time, or other instructions"
               ></textarea>
             </div>
@@ -435,7 +439,8 @@
         </div>
 
         <button
-          type="button"
+          type="submit"
+          form="checkoutForm"
           class="place-order-btn"
           id="placeOrderBtn"
         >
