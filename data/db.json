@@ -97,7 +97,7 @@
       "preOrder": true,
       "preparationTime": "5–7 working days",
       "deliveryTime": "1–3 working days",
-      "image": "/images/cf1b122c4dd8466d968f78187826e986.jpg",
+      "image": "/images/shoes/shoe-001.jpg",
       "available": true,
       "updatedAt": "2026-09-05T03:23:46.439Z"
     },
@@ -120,7 +120,7 @@
       "preOrder": true,
       "preparationTime": "5–7 working days",
       "deliveryTime": "1–3 working days",
-      "image": "/images/0a4ff32e67cb43ea8e54e11a59cdfadc.jpg",
+      "image": "/images/shoes/shoe-002.jpg",
       "available": true,
       "updatedAt": "2026-09-05T03:27:46.024Z"
     },
@@ -520,7 +520,7 @@
       "preOrder": true,
       "preparationTime": "5-7 working days",
       "deliveryTime": "1-3 working days",
-      "image": "/images/shoe-01.jpg",
+      "image": "/images/shoes/shoe-01.jpg",
       "available": true,
       "updatedAt": "2026-09-17T07:47:03.764Z"
     },
@@ -537,7 +537,7 @@
       "preOrder": true,
       "preparationTime": "5-7 working days",
       "deliveryTime": "1-3 working days",
-      "image": "/images/shoe-02.jpg",
+      "image": "/images/shoes/shoe-02.jpg",
       "available": true,
       "updatedAt": "2026-09-17T07:47:03.792Z"
     },
@@ -554,7 +554,7 @@
       "preOrder": true,
       "preparationTime": "5-7 working days",
       "deliveryTime": "1-3 working days",
-      "image": "/images/shoe-03.jpg",
+      "image": "/images/shoes/shoe-03.jpg",
       "available": true,
       "updatedAt": "2026-09-17T07:47:03.792Z"
     },
@@ -571,7 +571,7 @@
       "preOrder": true,
       "preparationTime": "5-7 working days",
       "deliveryTime": "1-3 working days",
-      "image": "/images/shoe-04.jpg",
+      "image": "/images/shoes/shoe-04.jpg",
       "available": true,
       "updatedAt": "2026-09-17T07:47:03.792Z"
     },
@@ -588,7 +588,7 @@
       "preOrder": true,
       "preparationTime": "5-7 working days",
       "deliveryTime": "1-3 working days",
-      "image": "/images/shoe-05.jpg",
+      "image": "/images/shoes/shoe-05.jpg",
       "available": true,
       "updatedAt": "2026-09-17T07:47:03.792Z"
     },
@@ -605,7 +605,7 @@
       "preOrder": true,
       "preparationTime": "5-7 working days",
       "deliveryTime": "1-3 working days",
-      "image": "/images/shoe-06.jpg",
+      "image": "/images/shoes/shoe-06.jpg",
       "available": true,
       "updatedAt": "2026-09-17T07:47:03.792Z"
     },
@@ -622,7 +622,7 @@
       "preOrder": true,
       "preparationTime": "5-7 working days",
       "deliveryTime": "1-3 working days",
-      "image": "/images/shoe-07.jpg",
+      "image": "/images/shoes/shoe-07.jpg",
       "available": true,
       "updatedAt": "2026-09-17T07:47:03.792Z"
     },
@@ -639,7 +639,7 @@
       "preOrder": true,
       "preparationTime": "5-7 working days",
       "deliveryTime": "1-3 working days",
-      "image": "/images/shoe-08.jpg",
+      "image": "/images/shoes/shoe-08.jpg",
       "available": true,
       "updatedAt": "2026-09-17T07:47:03.792Z"
     },
@@ -656,7 +656,7 @@
       "preOrder": true,
       "preparationTime": "5-7 working days",
       "deliveryTime": "1-3 working days",
-      "image": "/images/shoe-09.jpg",
+      "image": "/images/shoes/shoe-09.jpg",
       "available": true,
       "updatedAt": "2026-09-17T07:47:03.792Z"
     }
