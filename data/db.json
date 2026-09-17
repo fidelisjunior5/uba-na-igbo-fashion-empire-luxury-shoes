@@ -506,6 +506,159 @@
       "available": true,
       "createdAt": "2026-09-05T18:52:08.343Z",
       "updatedAt": "2026-09-05T18:52:57.249Z"
+    },
+    {
+      "id": "shoe-01",
+      "name": "Premium Glossy Horsebit Loafer",
+      "category": "shoes",
+      "subcategory": "Luxury Shoes",
+      "price": 35000,
+      "description": "Premium premium glossy horsebit loafer designed for a stylish, polished look.",
+      "colors": [
+        "Black"
+      ],
+      "preOrder": true,
+      "preparationTime": "5-7 working days",
+      "deliveryTime": "1-3 working days",
+      "image": "/images/shoe-01.jpg",
+      "available": true,
+      "updatedAt": "2026-09-17T07:47:03.764Z"
+    },
+    {
+      "id": "shoe-02",
+      "name": "Perforated Horsebit Loafer",
+      "category": "shoes",
+      "subcategory": "Luxury Shoes",
+      "price": 35000,
+      "description": "Premium perforated horsebit loafer designed for a stylish, polished look.",
+      "colors": [
+        "Black & Brown"
+      ],
+      "preOrder": true,
+      "preparationTime": "5-7 working days",
+      "deliveryTime": "1-3 working days",
+      "image": "/images/shoe-02.jpg",
+      "available": true,
+      "updatedAt": "2026-09-17T07:47:03.792Z"
+    },
+    {
+      "id": "shoe-03",
+      "name": "Premium Double-Strap Loafer",
+      "category": "shoes",
+      "subcategory": "Luxury Shoes",
+      "price": 35000,
+      "description": "Premium premium double-strap loafer designed for a stylish, polished look.",
+      "colors": [
+        "Brown"
+      ],
+      "preOrder": true,
+      "preparationTime": "5-7 working days",
+      "deliveryTime": "1-3 working days",
+      "image": "/images/shoe-03.jpg",
+      "available": true,
+      "updatedAt": "2026-09-17T07:47:03.792Z"
+    },
+    {
+      "id": "shoe-04",
+      "name": "Crocodile-Pattern Luxury Loafer",
+      "category": "shoes",
+      "subcategory": "Luxury Shoes",
+      "price": 25000,
+      "description": "Premium crocodile-pattern luxury loafer designed for a stylish, polished look.",
+      "colors": [
+        "Burgundy & Black"
+      ],
+      "preOrder": true,
+      "preparationTime": "5-7 working days",
+      "deliveryTime": "1-3 working days",
+      "image": "/images/shoe-04.jpg",
+      "available": true,
+      "updatedAt": "2026-09-17T07:47:03.792Z"
+    },
+    {
+      "id": "shoe-05",
+      "name": "Woven Leather Mule",
+      "category": "shoes",
+      "subcategory": "Luxury Shoes",
+      "price": 25000,
+      "description": "Premium woven leather mule designed for a stylish, polished look.",
+      "colors": [
+        "Black"
+      ],
+      "preOrder": true,
+      "preparationTime": "5-7 working days",
+      "deliveryTime": "1-3 working days",
+      "image": "/images/shoe-05.jpg",
+      "available": true,
+      "updatedAt": "2026-09-17T07:47:03.792Z"
+    },
+    {
+      "id": "shoe-06",
+      "name": "Woven Leather Mule",
+      "category": "shoes",
+      "subcategory": "Luxury Shoes",
+      "price": 25000,
+      "description": "Premium woven leather mule designed for a stylish, polished look.",
+      "colors": [
+        "Brown"
+      ],
+      "preOrder": true,
+      "preparationTime": "5-7 working days",
+      "deliveryTime": "1-3 working days",
+      "image": "/images/shoe-06.jpg",
+      "available": true,
+      "updatedAt": "2026-09-17T07:47:03.792Z"
+    },
+    {
+      "id": "shoe-07",
+      "name": "Premium Patterned Lace-Up Shoe",
+      "category": "shoes",
+      "subcategory": "Luxury Shoes",
+      "price": 35000,
+      "description": "Premium premium patterned lace-up shoe designed for a stylish, polished look.",
+      "colors": [
+        "Navy Blue"
+      ],
+      "preOrder": true,
+      "preparationTime": "5-7 working days",
+      "deliveryTime": "1-3 working days",
+      "image": "/images/shoe-07.jpg",
+      "available": true,
+      "updatedAt": "2026-09-17T07:47:03.792Z"
+    },
+    {
+      "id": "shoe-08",
+      "name": "Premium Crocodile-Pattern Lace-Up Shoe",
+      "category": "shoes",
+      "subcategory": "Luxury Shoes",
+      "price": 35000,
+      "description": "Premium premium crocodile-pattern lace-up shoe designed for a stylish, polished look.",
+      "colors": [
+        "Brown"
+      ],
+      "preOrder": true,
+      "preparationTime": "5-7 working days",
+      "deliveryTime": "1-3 working days",
+      "image": "/images/shoe-08.jpg",
+      "available": true,
+      "updatedAt": "2026-09-17T07:47:03.792Z"
+    },
+    {
+      "id": "shoe-09",
+      "name": "Classic Leather Loafer",
+      "category": "shoes",
+      "subcategory": "Luxury Shoes",
+      "price": 35000,
+      "description": "Premium classic leather loafer designed for a stylish, polished look.",
+      "colors": [
+        "Black"
+      ],
+      "preOrder": true,
+      "preparationTime": "5-7 working days",
+      "deliveryTime": "1-3 working days",
+      "image": "/images/shoe-09.jpg",
+      "available": true,
+      "updatedAt": "2026-09-17T07:47:03.792Z"
     }
   ],
   "orders": [
